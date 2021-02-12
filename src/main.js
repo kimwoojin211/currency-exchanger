@@ -19,10 +19,11 @@ import CurrencyService from './currency-service.js';
 
 function getElements(response){
   console.log("?????" + response);
+  const convrate = response.conversion_rate;
   if (response){
     console.log("lolok1");
-    $("#conversion_rate").text(response.conversion_rate);
-    $("#calculated").text(response.conversion_result);
+    $("#conversion_rate").text(convrate);
+    $("#calculated").text(`${(1*convrate).toFixed(2)} ${response.target_code}`);
   }
 }
 
@@ -35,5 +36,5 @@ async function makeApiCall(currency1,currency2,amount)
 
 $(".currency").on("click",function(){
   console.log("lol" + $(this).attr("id"));
-  makeApiCall("USD", $(this).attr("id"), 10);
+  makeApiCall("USD", $(this).attr("id"));
 });
