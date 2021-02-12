@@ -13,41 +13,50 @@ import './css/styles.css';
 import CurrencyService from './currency-service.js';
 
 function getElements(response){
-  console.log("?????" + JSON.stringify(response));
   if (response.result==="success"){
+    $("#broken").hide();
     const convrate = response.conversion_rate;
     const base_code = response.base_code;
     const target_code = response.target_code;
-    const calculated = new Intl.NumberFormat('en-US', { style: 'currency', currency: target_code }).format((1 * convrate).toFixed(2));
-    $("#conversion_rate").text(convrate);
-    $("#calculated").text(`${calculated} ${response.target_code}`);
-    $("#base_code").text(base_code);
-    $("#target_code").text(target_code);
+    $("#conversion").text(`The conversion rate is 1 ${base_code} : ${convrate} ${target_code}`)
+    if($("#amount").val()==="")
+      {
+        $("#conversion").hide();
+      }
+    else{
+      const amount = $("#amount").val()
+      const baseamount = new Intl.NumberFormat('en-US', { style: 'currency', currency: base_code }).format(amount);
+      const calculated = new Intl.NumberFormat('en-US', { style: 'currency', currency: target_code }).format(amount * convrate);
+      $(".amount").text(amount);
+      $("#calculated").text(`${baseamount} ${base_code} = ${calculated} ${target_code}`);
+      $("#conversion").show();
+    }
+    $("#output").show();
   }
   else{
-    console.log(response["error-type"]);
-    if(response.result === "error")
-    {
-    console.log(response["error-type"]);
-    $("#calculated").text(`sucks to suck. ${response["error-type"]}`);
-    }
-    else
-    $("#calculated").text(`sucks to suck. ${response}`);
+    let message = "Error! "
+    if(response.result === "error") //request goes through, 
+    // if more than 3 letters, then error-type: malformed request
+    // if less than 3 letters or 3 letters, but no match, then error-type: unsupported code
+      message += `${response["error-type"]}`;
+    else // if not right format (includes numbers), then it returns a 404
+      message += `${response}`;
+    $("#error").text(message);
+    $("#broken").show();
+    $("#output").hide();
   }
 }
 
 async function makeApiCall(currency1,currency2)
 {
   const response = await CurrencyService.convert(currency1,currency2);
-  console.log("ok");
   getElements(response);
 }
 
 $(".currency").on("click",function(){
-  console.log("lol " + $("#base").val() + " " + $("#target").val());
-  makeApiCall($("#base").val(), $("#target").val());
+    makeApiCall($("#base_code").val(), $("#target_code").val());
 });
 
-$("#amount").on("submit",function(event){
+$("input").on("submit",function(event){
   event.preventDefault();
 })

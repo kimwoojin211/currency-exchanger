@@ -7,20 +7,31 @@
 </head>
 
 <body>
-  <!-- <button class="btn btn-dark currency" id="EURo">EUR</button>
-  <button class="btn btn-dark currency" id="krw">KRW</button>
-  <button class="btn btn-dark currency" id="352">JPY</button>
-  <button class="btn btn-dark currency" id="MXN">MXN</button>
-  <button class="btn btn-dark currency" id="4AD">CAD</button>
-  <button class="btn btn-dark currency" id="IN3">INR</button> -->
-  <!-- fake button to test invalid url -->
-  <input type="text" id="base" placeholder="USD" default="USD">
-  <input type="text" id="target">
-  <button class="btn btn-dark currency" id="LOL">LOL</button>
-  <div id="output">
-    <p> The conversion rate is: 1 <span id="base_code"></span> : <span id = "conversion_rate"></span> <span id="target_code"></span></p>
-    <p><input type="text" id="amount">USD : <span id="calculated"></span></p>
+  <!-- <select id="base">
+    <option>USD</option>
+  </select>
+  <select class="target" id="target">
+    <option>USD</option>
+    <option>KRW</option>
+    <option>JPY</option>
+    <option>MXN</option>
+    <option>CAD</option>
+    <option>INR</option>
+  </select> -->
+  <div>
+    <h1>Select a base and target Currency ("USD", "EUR", etc.)</h1>
+    <input type="text" class="base" id="base_code" placeholder="Base Code" default="USD">
+    <input type="text" class="target" id="target_code" placeholder="Target Code">
+    <button class="btn btn-dark currency" id="LOL">LOL</button>
   </div>
+  <div>
+    <input type="text" class="amount" id="amount" placeholder="Enter amount to convert">
+  </div>
+  <div id="output">
+    <p><span id="conversion"></span></p>
+    <div class="converted"> <span id="calculated"></span></div>
+  </div>
+  <div id="broken"><p><span id="error"></span></p></div>
 </body>
 
 </html>

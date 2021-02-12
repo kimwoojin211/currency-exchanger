@@ -1,7 +1,11 @@
 body {
   background-color: silver;
 }
-input 
+.codes
 {
   width: 100px;
+}
+#output
+{
+  display:none;
 }
