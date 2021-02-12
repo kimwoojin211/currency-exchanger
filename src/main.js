@@ -44,8 +44,8 @@ async function makeApiCall(currency1,currency2)
 }
 
 $(".currency").on("click",function(){
-  console.log("lol" + $(this).attr("id"));
-  makeApiCall("USD", $(this).attr("id"));
+  console.log("lol " + $("#base").val() + " " + $("#target").val());
+  makeApiCall($("#base").val(), $("#target").val());
 });
 
 $("#amount").on("submit",function(event){
