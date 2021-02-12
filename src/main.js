@@ -5,13 +5,7 @@ If the API call results in an error (any message not a 200 OK), the application 
 If the query response doesn't include that particular currency, the application should return a notification that states the currency in question doesn't exist. (Note: Even if you use a dropdown menu to specify currencies instead of a form field, you'll still need to add this functionality to your code.)
 */
 
-/* Wooj notes: Before that though, I need to get this API call working
-uhhhhhhhhh why is it not working.
-whyyyyyyyyyyyyyyyy
-lolok
-OH. I GOT IT. there was no response.main.
-
-next step: convert lolok button to EUR button
+/*wooj notes: oh. there was a url for a amount conversion already lullllllllllllll
 
 */
 import $ from 'jquery';
@@ -28,17 +22,18 @@ function getElements(response){
   if (response){
     console.log("lolok1");
     $("#conversion_rate").text(response.conversion_rate);
+    $("#calculated").text(response.conversion_result);
   }
 }
 
-async function makeApiCall(currency1,currency2)
+async function makeApiCall(currency1,currency2,amount)
 {
   console.log("ok");
-  const response = await CurrencyService.convert(currency1,currency2);
+  const response = await CurrencyService.convert(currency1,currency2,amount);
   getElements(response);
 }
 
-$("#lolok").on("click",function(){
-  console.log("lol");
-  makeApiCall("USD","EUR");
+$(".currency").on("click",function(){
+  console.log("lol" + $(this).attr("id"));
+  makeApiCall("USD", $(this).attr("id"), 10);
 });
