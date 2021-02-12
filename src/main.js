@@ -19,23 +19,27 @@ function getElements(response){
     const base_code = response.base_code;
     const target_code = response.target_code;
     $("#conversion").text(`The conversion rate is 1 ${base_code} : ${convrate} ${target_code}`)
-    if($("#amount").val()==="")
+    const amount = $("#amount").val();
+    if(amount==="")
       {
-        $("#conversion").hide();
+        $("#calculated").text(`Try entering a valid number in the box  box to see how much how much ${target_code} you would have.`);
       }
+    else if(isNaN(parseInt(amount)))
+    {
+      $("#calculated").text(`Error. Invalid amount detected. Please enter a valid number.`);
+    }
     else{
-      const amount = $("#amount").val()
       const baseamount = new Intl.NumberFormat('en-US', { style: 'currency', currency: base_code }).format(amount);
       const calculated = new Intl.NumberFormat('en-US', { style: 'currency', currency: target_code }).format(amount * convrate);
-      $(".amount").text(amount);
       $("#calculated").text(`${baseamount} ${base_code} = ${calculated} ${target_code}`);
       $("#conversion").show();
     }
     $("#output").show();
   }
   else{
+    $("#output").hide();
     let message = "Error! "
-    if(response.result === "error") //request goes through, 
+    if(response.result === "error") //request goes through, but gets an error 
     // if more than 3 letters, then error-type: malformed request
     // if less than 3 letters or 3 letters, but no match, then error-type: unsupported code
       message += `${response["error-type"]}`;
@@ -43,7 +47,7 @@ function getElements(response){
       message += `${response}`;
     $("#error").text(message);
     $("#broken").show();
-    $("#output").hide();
+
   }
 }
 
@@ -53,7 +57,7 @@ async function makeApiCall(currency1,currency2)
   getElements(response);
 }
 
-$(".currency").on("click",function(){
+$("#convert").on("click",function(){
     makeApiCall($("#base_code").val(), $("#target_code").val());
 });
 

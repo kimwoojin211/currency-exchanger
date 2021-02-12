@@ -18,20 +18,22 @@
     <option>CAD</option>
     <option>INR</option>
   </select> -->
+<div class="container">
   <div>
     <h1>Select a base and target Currency ("USD", "EUR", etc.)</h1>
     <input type="text" class="base" id="base_code" placeholder="Base Code" default="USD">
     <input type="text" class="target" id="target_code" placeholder="Target Code">
-    <button class="btn btn-dark currency" id="LOL">LOL</button>
+    <button class="btn btn-dark" id="convert">Convert!</button>
   </div>
+  <p><span id="conversion"></span></p>
   <div>
     <input type="text" class="amount" id="amount" placeholder="Enter amount to convert">
   </div>
   <div id="output">
-    <p><span id="conversion"></span></p>
     <div class="converted"> <span id="calculated"></span></div>
   </div>
   <div id="broken"><p><span id="error"></span></p></div>
+</div>
 </body>
 
 </html>
