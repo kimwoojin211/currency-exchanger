@@ -14,7 +14,7 @@ import CurrencyService from './currency-service.js';
 
 function getElements(response){
   console.log("?????" + JSON.stringify(response));
-  if (response){
+  if (response.result==="success"){
     const convrate = response.conversion_rate;
     const base_code = response.base_code;
     const target_code = response.target_code;
@@ -23,6 +23,16 @@ function getElements(response){
     $("#calculated").text(`${calculated} ${response.target_code}`);
     $("#base_code").text(base_code);
     $("#target_code").text(target_code);
+  }
+  else{
+    console.log(response["error-type"]);
+    if(response.result === "error")
+    {
+    console.log(response["error-type"]);
+    $("#calculated").text(`sucks to suck. ${response["error-type"]}`);
+    }
+    else
+    $("#calculated").text(`sucks to suck. ${response}`);
   }
 }
 
@@ -35,7 +45,7 @@ async function makeApiCall(currency1,currency2)
 
 $(".currency").on("click",function(){
   console.log("lol" + $(this).attr("id"));
-  makeApiCall("124124", $(this).attr("id"));
+  makeApiCall("USD", $(this).attr("id"));
 });
 
 $("#amount").on("submit",function(event){
