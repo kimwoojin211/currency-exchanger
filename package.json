@@ -1,5 +1,5 @@
 {
-  "name": "",
+  "name": "Currency Exchanger",
   "version": "1.0.0",
   "description": "",
   "main": "main.js",
@@ -10,7 +10,7 @@
     "test": "jest --coverage"
   },
   "keywords": [],
-  "author": "",
+  "author": "Woo Jin Kim",
   "license": "ISC",
   "devDependencies": {
     "@babel/core": "^7.6.4",
