@@ -14,15 +14,15 @@ import CurrencyService from './currency-service.js';
 
 function getElements(response){
   if (response.result==="success"){
-    $("#broken").hide();
     const convrate = response.conversion_rate;
     const base_code = response.base_code;
     const target_code = response.target_code;
     $("#conversion").text(`The conversion rate is 1 ${base_code} : ${convrate} ${target_code}`)
+    $("#conversion").show();
     const amount = $("#amount").val();
     if(amount==="")
       {
-        $("#calculated").text(`Try entering a valid number in the box  box to see how much how much ${target_code} you would have.`);
+        $("#calculated").text(`Try entering a valid number in the box to see how much how much ${target_code} you would have.`);
       }
     else if(isNaN(parseInt(amount)))
     {
@@ -32,23 +32,31 @@ function getElements(response){
       const baseamount = new Intl.NumberFormat('en-US', { style: 'currency', currency: base_code }).format(amount);
       const calculated = new Intl.NumberFormat('en-US', { style: 'currency', currency: target_code }).format(amount * convrate);
       $("#calculated").text(`${baseamount} ${base_code} = ${calculated} ${target_code}`);
-      $("#conversion").show();
     }
-    $("#output").show();
+    $("#calculated").show();
   }
   else{
-    $("#output").hide();
-    let message = "Error! "
-    if(response.result === "error") //request goes through, but gets an error 
+    let message = `Error! Error Code: `;
+    
+    if(response.result === "error")
+    { //request goes through, but gets an error 
     // if more than 3 letters, then error-type: malformed request
     // if less than 3 letters or 3 letters, but no match, then error-type: unsupported code
       message += `${response["error-type"]}`;
+      // if (/^[a-z]{3}$/.test($("#base_code").val()) && /^[a-z]{3}$/.test($("#target_code").val()))
+      // {
+      message += `Please ensure that both currency codes are valid ISO 4217 codes`;
+    }
     else // if not right format (includes numbers), then it returns a 404
-      message += `${response}`;
-    $("#error").text(message);
-    $("#broken").show();
+    {
+      message += `${response}Please check that there are no numbers or special characters in either currency codes.`;
+    }
+    $("#conversion").text(message);
+    $("#calculated").hide();
 
-  }
+        
+
+    }
 }
 
 async function makeApiCall(currency1,currency2)
