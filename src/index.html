@@ -6,16 +6,18 @@
   <title></title>
 </head>
 
-<body>
-  <button class = "btn btn-dark currency" id="EUR">EUR</button>
-  <button class="btn btn-dark currency" id="KRW">KRW  </button>
-  <button class="btn btn-dark currency" id="JPY">JPY</button>
-  <button class="btn btn-dark currency" id="MXN">MXN</button>
-  <button class="btn btn-dark currency" id="CAD">CAD</button>
-  <button class="btn btn-dark currency" id="INR">INR</button>
+<body> 
+  <button class="btn btn-dark currency" id="EURo">EUR</button>
+  <button class="btn btn-dark currency" id="KRW4">KRW</button>
+  <button class="btn btn-dark currency" id="352">JPY</button>
+  <button class="btn btn-dark currency" id="M3XN">MXN</button>
+  <button class="btn btn-dark currency" id="4AD">CAD</button>
+  <button class="btn btn-dark currency" id="IN3">INR</button>
+  <!-- fake button to test invalid url -->
+  <button class="btn btn-dark currency" id="LOL">LOL</button>
   <div id="output">
-    <p> The conversion rate is: <span id = "conversion_rate"></span></p>
-    <p> $1 USD : <span id="calculated"></span></p>
+    <p> The conversion rate is: 1 <span id="base_code"></span> : <span id = "conversion_rate"></span> <span id="target_code"></span></p>
+    <p><input type="text" id="amount">USD : <span id="calculated"></span></p>
   </div>
 </body>
 

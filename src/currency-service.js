@@ -1,18 +1,22 @@
-/* I can't get the API get call to work with a decimal in the url. is this intended or is this a bug? either way, this makes me not want to use the conversion_result property if it can't convert from decimals. i'd rather just do the multiplication itself with the rate, and then display that result.
-
-Solution: take out ${amount} from the url.
+/*
 */
 
+// curr
 export default class CurrencyService {
-  static async convert(currency1, currency2, amount){
+  static async convert(currency1, currency2){
     try {
       const response = await fetch(`https://v6.exchangerate-api.com/v6/${process.env.API_KEY}/pair/${currency1}/${currency2}`);
+      console.log("rofl " + JSON.stringify(response));
       if(!response.ok) {
-        throw Error(response.error-type);
+        console.log("loloops");
+        if (!(/^[a-z]{3}$/gi.test(currency1)) || !(/^[a-z]{3}$/gi.test(currency2)))
+          throw Error("check yo codes");
       }
+        else if(response.result==="error")
+        throw Error(`${response.error-type}`);
       return response.json();
     } catch(error){
-      console.log("loloops");
+      console.log("loloops1");
       return error.message;
     }
   }
