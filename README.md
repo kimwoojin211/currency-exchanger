@@ -10,7 +10,7 @@
 * _CSS_
 * _Javascript_
 * _jQuery_
-
+* _ExchangeRate-API_
 
 ## Description
 
@@ -32,7 +32,8 @@
 
 ## Known Bugs
 
-* _None (yet)_
+* _Does not check the input of the optional base amount value very well. Code still runs even if numerals aren't used._
+* _No CSS done_
 
 ## License
 
