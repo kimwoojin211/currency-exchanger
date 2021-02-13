@@ -1,11 +1,6 @@
-/* Goals
-If the API call results in an error (any message not a 200 OK), the application should return a notification to the user that states what the error is. (That means the error should show up in the DOM, not in the console.)
-If the query response doesn't include that particular currency, the application should return a notification that states the currency in question doesn't exist. (Note: Even if you use a dropdown menu to specify currencies instead of a form field, you'll still need to add this functionality to your code.)
-*/
-
 /*wooj notes:
-wanna add a seperate class that has all of the supported currencies and be able to populate a drop down menu from that.
-*/
+mer.*/
+
 import $ from 'jquery';
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -37,26 +32,25 @@ function getElements(response){
   }
   else{
     let message = `Error! Error Code: `;
-    
     if(response.result === "error")
-    { //request goes through, but gets an error 
-    // if more than 3 letters, then error-type: malformed request
-    // if less than 3 letters or 3 letters, but no match, then error-type: unsupported code
-      message += `${response["error-type"]}`;
-      // if (/^[a-z]{3}$/.test($("#base_code").val()) && /^[a-z]{3}$/.test($("#target_code").val()))
-      // {
-      message += `Please ensure that both currency codes are valid ISO 4217 codes`;
+    { 
+      message += `${response["error-type"]} (Please ensure that both currency codes are valid ISO 4217 codes)`;
     }
-    else // if not right format (includes numbers), then it returns a 404
+    else
     {
-      message += `${response}Please check that there are no numbers or special characters in either currency codes.`;
+      message += `${response}.`;
     }
     $("#conversion").text(message);
     $("#calculated").hide();
+  }
+}
 
-        
-
-    }
+async function loadCodes(codes) {
+  const response = await CurrencyService.callForCodes();
+  console.log(Object.keys(response.conversion_rates));
+  Object.keys(response.conversion_rates).forEach(element => {
+    codes.push[element]
+  });
 }
 
 async function makeApiCall(currency1,currency2)
@@ -71,4 +65,4 @@ $("#convert").on("click",function(){
 
 $("input").on("submit",function(event){
   event.preventDefault();
-})
+});

@@ -7,23 +7,13 @@
 </head>
 
 <body>
-  <!-- <select id="base">
-    <option>USD</option>
-  </select>
-  <select class="target" id="target">
-    <option>USD</option>
-    <option>KRW</option>
-    <option>JPY</option>
-    <option>MXN</option>
-    <option>CAD</option>
-    <option>INR</option>
-  </select> -->
 <div class="container">
   <div>
     <h1>Select a base and target Currency ("USD", "EUR", etc.)</h1>
     <input type="text" class="base" id="base_code" placeholder="Base Code" default="USD">
     <input type="text" class="target" id="target_code" placeholder="Target Code">
     <button class="btn btn-dark" id="convert">Convert!</button>
+    <a href="https://www.exchangerate-api.com/docs/supported-currencies">Click here for a list of supported currencies!</a>
   </div>
   <p id="conversion"><span class="output"></span></p>
   <div>
