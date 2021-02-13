@@ -7,22 +7,23 @@
 </head>
 
 <body>
-<div class="container">
-  <div>
-    <h1>Select a base and target Currency ("USD", "EUR", etc.)</h1>
-    <input type="text" class="base" id="base_code" placeholder="Base Code" default="USD">
-    <input type="text" class="target" id="target_code" placeholder="Target Code">
-    <button class="btn btn-dark" id="convert">Convert!</button>
-    <a href="https://www.exchangerate-api.com/docs/supported-currencies">Click here for a list of supported currencies!</a>
+  <div class="container">
+    <div>
+      <h1>Select a base and target Currency ("USD", "EUR", etc.)</h1>
+      <input type="text" class="base" id="base_code" placeholder="Base Code" default="USD">
+      <input type="text" class="target" id="target_code" placeholder="Target Code">
+      <button class="btn btn-dark" id="convert">Convert!</button>
+      <a href="https://www.exchangerate-api.com/docs/supported-currencies">Click here for a list of supported
+        currencies!</a>
+    </div>
+    <p id="conversion"><span class="output"></span></p>
+    <div>
+      <input type="text" class="amount" id="amount" placeholder="Enter amount to convert">
+    </div>
+    <div>
+      <div> <span id="calculated"></span></div>
+    </div>
   </div>
-  <p id="conversion"><span class="output"></span></p>
-  <div>
-    <input type="text" class="amount" id="amount" placeholder="Enter amount to convert">
-  </div>
-  <div>
-    <div> <span id="calculated"></span></div>
-  </div>
-</div>
 </body>
 
 </html>
