@@ -1,11 +1,13 @@
-/*wooj notes:
-mer.*/
+/*wooj notes: */
 
 import $ from 'jquery';
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './css/styles.css';
 import CurrencyService from './currency-service.js';
+
+let validCodes = [];
+loadCodes();
 
 function getElements(response){
   if (response.result==="success"){
@@ -31,25 +33,25 @@ function getElements(response){
     $("#calculated").show();
   }
   else{
+    //Error! Error Code: unsupported code. Base Code is not a valid currency
     let message = `Error! Error Code: `;
-    if(response.result === "error")
-    { 
-      message += `${response["error-type"]} (Please ensure that both currency codes are valid ISO 4217 codes)`;
-    }
+    if(response.result === "error") 
+      message += `${response["error-type"]}`;
     else
-    {
       message += `${response}.`;
-    }
     $("#conversion").text(message);
+    if (/^[a-z]{3}$/.test($("#base_code").val()))
+      $("#conversion").append("Base code is not a valid ISO 4217 code");
+    if (/^[a-z]{3}$/.test($("#target_code").val()))
+      $("#conversion").append("Target code is not a valid ISO 4217 code");
     $("#calculated").hide();
   }
 }
 
-async function loadCodes(codes) {
+async function loadCodes() {
   const response = await CurrencyService.callForCodes();
-  console.log(Object.keys(response.conversion_rates));
   Object.keys(response.conversion_rates).forEach(element => {
-    codes.push[element]
+    validCodes.push(element);
   });
 }
 
@@ -60,6 +62,7 @@ async function makeApiCall(currency1,currency2)
 }
 
 $("#convert").on("click",function(){
+  if(validCodes.length!==0)
     makeApiCall($("#base_code").val(), $("#target_code").val());
 });
 
