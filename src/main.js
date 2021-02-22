@@ -10,7 +10,6 @@ function getElements(response) {
   for(let element of codes){
     codes2.push(element.value);
   }
-  // is there a more concise way to do the above?
   if (response.result === "success") {
     const convrate = response.conversion_rate;
     const base_code = response.base_code;
@@ -18,7 +17,6 @@ function getElements(response) {
     $("#conversion").text(`The conversion rate is 1 ${base_code} : ${convrate} ${target_code}`);
     $("#conversion").show();
     let amount = $("#amount").val();
-    console.log(parseInt(amount));
     if (amount === "") {
       $("#calculated").text(`Try entering a valid number in the box to see how much ${target_code} you would have.`);
     }
