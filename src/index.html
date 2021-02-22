@@ -10,11 +10,15 @@
   <div class="container">
     <div>
       <h1>Select a base and target Currency ("USD", "EUR", etc.)</h1>
-      <input type="text" class="base" id="base_code" placeholder="Base Code" default="USD">
-      <input type="text" class="target" id="target_code" placeholder="Target Code">
+      <input type="text" class="base code" id="base_code" placeholder="Base Code" default="USD" list="dropdownBase">
+      <datalist class="base" id="dropdownBase">
+      </datalist>
+      <input type="text" class="target code" id="target_code" placeholder="Target Code" list="dropdownBase">
+      <datalist class="target" id="dropdownTarget">
+      </datalist>
       <button class="btn btn-dark" id="convert">Convert!</button>
-      <a href="https://www.exchangerate-api.com/docs/supported-currencies">Click here for a list of supported
-        currencies!</a>
+      <a href="https://www.exchangerate-api.com/docs/supported-currencies">Click here for a full list of supported
+        currencies and their respective code!</a>
     </div>
     <p id="conversion"><span class="output"></span></p>
     <div>
